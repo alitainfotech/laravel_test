@@ -42,4 +42,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Get the Insurance Case associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function InsuranceCase()
+    {
+        return $this->hasOne(InsuranceCase::class, 'user_id');
+    }
 }

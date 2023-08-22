@@ -12,9 +12,7 @@
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
                         {{ __('Get a Quote') }}
                     </h2>
-                    <form>
-                        @livewire('tabs-container')
-                    </form>
+                    @livewire('tabs-container')
                 </div>
             </div>
         </div>
