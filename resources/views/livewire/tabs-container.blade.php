@@ -71,7 +71,7 @@
                     <div class="mt-2">
                         <input wire:change="saveData" wire:model="milage" type="Number" id="milage" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Enter Vehicle Milage" required>
                         @error('milage') <span class="error text-red-500">{{ $message }}</span> @enderror
-                        @if ($milage > 99)
+                        @if ($milage > 99999)
                             <span class="error text-red-500">We can't insure your car</span>
                         @endif
                     </div>
@@ -81,7 +81,7 @@
                 <div class="mt-6">
                     <label for="buying-date" class="block text-sm font-medium leading-6 text-gray-900">Vehicle Buying Date</label>
                     <div class="mt-2">
-                        <input wire:change="saveData" wire:model="buyingDate" type="date" id="buying-date" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Enter Purchase Date" required>
+                        <input wire:change="saveData" wire:model="buyingDate" type="date" id="buying-date" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Enter Purchase Date" max="" required>
                         @error('buyingDate') <span class="error text-red-500">{{ $message }}</span> @enderror
                     </div>
                 </div>
@@ -157,4 +157,11 @@
         @endif
     </div>
 </div>
+
+<script>
+    // Get the current date in YYYY-MM-DD format
+    const currentDate = new Date().toISOString().split('T')[0];
+    // Set the max attribute of the input element
+    document.getElementById('buying-date').setAttribute('max', currentDate);
+</script>
 
