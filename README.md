@@ -13,6 +13,10 @@ cp .env.example .env
 php artisan key:generate
 ```
 ```
+## Please note that you need to set the user name and password of your local host phpmyadmin in .env file before running following command
+php artisan migrate
+```
+```
 npm install
 npm run dev
 ```
