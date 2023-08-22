@@ -25,9 +25,12 @@ class TabsContainer extends Component
 
     public function mount()
     {
+        // Get Authencated user
         $user = Auth::user();
 
+
         if ($user) {
+            // Get data of authencated user
             $formData = InsuranceCase::where('user_id', $user->id)->first();
 
             if ($formData) {
@@ -42,8 +45,12 @@ class TabsContainer extends Component
         }
     }
 
+    /**
+     * Function to validate case name property
+    */
     public function updatedCaseName($caseName){
 
+        // Case name property validation
         $this->validateOnly($caseName, [
             'caseName' => ['required', 'string'],
         ]);
@@ -51,8 +58,12 @@ class TabsContainer extends Component
         $this->saveData();
     }
 
+    /**
+     * Function to validate Maker property
+    */
     public function updatedMaker($maker){
 
+        // Maker property validation
         $this->validateOnly($maker, [
             'maker' => ['required'],
         ]);
@@ -60,8 +71,12 @@ class TabsContainer extends Component
         $this->saveData();
     }
 
+    /**
+     * Function to validate Model
+    */
     public function updatedModel($model){
 
+        // Model property validation
         $this->validateOnly($model, [
             'model' => ['required'],
         ]);
@@ -69,8 +84,12 @@ class TabsContainer extends Component
         $this->saveData();
     }
 
+    /**
+     * Function to validate Milage
+    */
     public function updatedMilage($milage){
 
+        // Milage property validation
         $this->validateOnly($milage, [
             'milage' => ['required', 'numeric', 'min:1', 'max:99']
         ]);
@@ -78,8 +97,12 @@ class TabsContainer extends Component
         $this->saveData();
     }
 
+    /**
+     * Function to validate Purchase Date
+    */
     public function updatedBuyingDate($buyingDate){
 
+        // Buying Date property validation
         $this->validateOnly($buyingDate, [
             'buyingDate' => ['required', 'date'],
         ]);
@@ -87,8 +110,12 @@ class TabsContainer extends Component
         $this->saveData();
     }
 
+    /**
+     * Function to validate Color property
+    */
     public function updatedColor($color){
 
+        // Color property validation
         $this->validateOnly($color, [
             'color' => ['required'],
         ]);
@@ -96,8 +123,12 @@ class TabsContainer extends Component
         $this->saveData();
     }
 
+    /**
+     * Function to validate Drivetrain property
+    */
     public function updatedDriveTrain($driveTrain){
 
+        // Drive train property validation
         $this->validateOnly($driveTrain, [
             'driveTrain' => ['required'],
         ]);
@@ -105,8 +136,13 @@ class TabsContainer extends Component
         $this->saveData();
     }
 
+
+    /**
+     * Function to validate Image property
+    */
     public function updatedImage($image){
 
+        // Image property validation
         $this->validateOnly($image, [
             'image' => ['required', 'image'],
         ]);
@@ -114,14 +150,19 @@ class TabsContainer extends Component
         $this->saveData();
     }
 
+    /**
+     * Functon to change active tab
+    */
     public function nextTab(){
-
         $this->activeTab = 'page-two';
-
     }
 
+    /**
+     * Function to store properties to database
+    */
     public function saveData()
     {
+        // Get auth user's data from database
         $formData = InsuranceCase::where('user_id', Auth()->user()->id)->first();
 
         $data = [
@@ -135,11 +176,13 @@ class TabsContainer extends Component
             'drive_train' => $this->driveTrain,
         ];
 
+        // Check if input has image and mode it to storage
         if($this->image){
             $path = $this->image->store('photo', 'public');
             $data['image'] = $path;
         }
 
+        // Update Or Create properties to database
         if($formData){
             $formData->update($data);
         }else{
@@ -147,10 +190,15 @@ class TabsContainer extends Component
         }
     }
 
+    /**
+     * Function to send success message
+    */
     public function getQuote()
     {
+        // Success message
         $this->successMessage = 'Thank you! for Inquire, We will Get back to you soon';
 
+        // Change active tab
         $this->activeTab = 'page-one';
     }
 

@@ -4,6 +4,7 @@
         <h3 class="text-green-600">{{ $successMessage }}</h3>
     @endif
 
+    {{-- Tab buttons --}}
     <ul class="tabs flex flex-col sm:flex-row">
         <li wire:click="$set('activeTab', 'page-one')" class="{{ $activeTab === 'page-one' ? 'active text-indigo-400 border-indigo-400' : 'text-gray-600 border-grey-500' }} tab text-gray-600 p-4 block focus:outline-none border-b-2 cursor-pointer">
             Page One
@@ -15,14 +16,17 @@
 
     <div>
         @if ($activeTab === 'page-one')
+        {{-- Page One --}}
         <div>
             <div class="p-6">
+                {{-- Name --}}
                 <label for="case-name" class="block text-sm font-medium leading-6 text-gray-900">Case Name</label>
                 <div class="mt-2">
                     <input wire:change="saveData" wire:model="caseName" type="text" id="case-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Enter Case Name" required>
                     @error('caseName') <span class="error text-red-500">{{ $message }}</span> @enderror
                 </div>
 
+                {{-- Maker --}}
                 <div class="mt-6">
                     <label for="maker" class="block text-sm font-medium leading-6 text-gray-900">Vehicle Maker</label>
                     <div class="mt-2">
@@ -33,8 +37,9 @@
                             <option value="jeep">Jeep</option>
                         </select>
                     @error('maker') <span class="error text-red-500">{{ $message }}</span> @enderror
-                    </div>
+                </div>
 
+                {{-- Model --}}
                 @if ($maker)
                 <div class="mt-6">
                     <label for="model" class="mt-6 block text-sm font-medium leading-6 text-gray-900">Vehicle Model</label>
@@ -60,6 +65,7 @@
                 @endif
                 </div>
 
+                {{-- Milage --}}
                 <div class="mt-6">
                     <label for="milage" class="block text-sm font-medium leading-6 text-gray-900">Vehicle Milage</label>
                     <div class="mt-2">
@@ -71,6 +77,7 @@
                     </div>
                 </div>
 
+                {{-- Buying Date --}}
                 <div class="mt-6">
                     <label for="buying-date" class="block text-sm font-medium leading-6 text-gray-900">Vehicle Buying Date</label>
                     <div class="mt-2">
@@ -78,15 +85,20 @@
                         @error('buyingDate') <span class="error text-red-500">{{ $message }}</span> @enderror
                     </div>
                 </div>
+
+                {{-- Next button --}}
                 <div class="mt-6 flex items-center justify-end">
                     <button wire:click="nextTab" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" >
                         Next
                     </button>
                 </div>
             </div>
+            {{-- End page one tab --}}
         @elseif ($activeTab === 'page-two')
+        {{-- Page Two --}}
         <div>
             <div class="p-6">
+                {{-- Color --}}
                 <div class="mt-6">
                     <label for="maker" class="block text-sm font-medium leading-6 text-gray-900">Vehicle Color</label>
                     <div class="mt-2">
@@ -101,6 +113,7 @@
                     </div>
                 </div>
 
+                {{-- Drive Train --}}
                 @if($model === 'grand-cherokee')
                     <div class="mt-6">
                         <label for="driveTrain" class="block text-sm font-medium leading-6 text-gray-900">Drive Train</label>
@@ -114,9 +127,9 @@
                     @error('driveTrain') <span class="error text-red-500">{{ $message }}</span> @enderror
                 @endif
 
+                {{-- Image --}}
                 <div class="mt-6">
-                    <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900">Photo</label>
-
+                    <label for="photo" class="block text-sm font-medium leading-6 text-gray-900">Photo</label>
                     <div class="flex items-center justify-center w-full">
                         <label for="image" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
                             <div class="flex flex-col items-center justify-center pt-5 pb-6">
@@ -132,6 +145,7 @@
                     @error('image') <span class="error text-red-500">{{ $message }}</span> @enderror
                 </div>
 
+                {{-- Get Quote button --}}
                 <div class="mt-6 flex items-center justify-end">
                     <button wire:click="getQuote" type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                         Get Quote
@@ -139,6 +153,7 @@
                 </div>
             </div>
         </div>
+        {{-- End tab page two --}}
         @endif
     </div>
 </div>
